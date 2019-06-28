@@ -119,6 +119,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
   renderUsernameOnMessage?: boolean
+  inverted?: boolean
   position: 'left' | 'right'
   currentMessage?: TMessage
   nextMessage?: TMessage
@@ -258,12 +259,14 @@ export default class Bubble<
     }
   }
 
-  handleBubbleToNext() {
+  styledBubbleToNext() {
     const {
       currentMessage,
       nextMessage,
       position,
       containerToNextStyle,
+      containerToPreviousStyle,
+      inverted,
     } = this.props
     if (
       currentMessage &&
@@ -272,20 +275,29 @@ export default class Bubble<
       isSameUser(currentMessage, nextMessage) &&
       isSameDay(currentMessage, nextMessage)
     ) {
-      return [
-        styles[position].containerToNext,
-        containerToNextStyle && containerToNextStyle[position],
-      ]
+      if (inverted) {
+        return [
+          styles[position].containerToNext,
+          containerToNextStyle && containerToNextStyle[position],
+        ]
+      } else {
+        return [
+          styles[position].containerToPrevious,
+          containerToPreviousStyle && containerToPreviousStyle[position],
+        ]
+      }
     }
     return null
   }
 
-  handleBubbleToPrevious() {
+  styledBubbleToPrevious() {
     const {
       currentMessage,
       previousMessage,
       position,
       containerToPreviousStyle,
+      containerToNextStyle,
+      inverted,
     } = this.props
     if (
       currentMessage &&
@@ -294,10 +306,17 @@ export default class Bubble<
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage)
     ) {
-      return [
-        styles[position].containerToPrevious,
-        containerToPreviousStyle && containerToPreviousStyle[position],
-      ]
+      if (inverted) {
+        return [
+          styles[position].containerToPrevious,
+          containerToPreviousStyle && containerToPreviousStyle[position],
+        ]
+      } else {
+        return [
+          styles[position].containerToNext,
+          containerToNextStyle && containerToNextStyle[position],
+        ]
+      }
     }
     return null
   }
@@ -454,8 +473,8 @@ export default class Bubble<
           style={[
             styles[position].wrapper,
             wrapperStyle && wrapperStyle[position],
-            this.handleBubbleToNext(),
-            this.handleBubbleToPrevious(),
+            this.styledBubbleToNext(),
+            this.styledBubbleToPrevious(),
           ]}
         >
           <TouchableWithoutFeedback
