@@ -119,7 +119,6 @@ export interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
   renderUsernameOnMessage?: boolean
-  inverted?: boolean
   position: 'left' | 'right'
   currentMessage?: TMessage
   nextMessage?: TMessage
@@ -265,8 +264,6 @@ export default class Bubble<
       nextMessage,
       position,
       containerToNextStyle,
-      containerToPreviousStyle,
-      inverted,
     } = this.props
     if (
       currentMessage &&
@@ -275,17 +272,10 @@ export default class Bubble<
       isSameUser(currentMessage, nextMessage) &&
       isSameDay(currentMessage, nextMessage)
     ) {
-      if (inverted) {
-        return [
-          styles[position].containerToNext,
-          containerToNextStyle && containerToNextStyle[position],
-        ]
-      } else {
-        return [
-          styles[position].containerToPrevious,
-          containerToPreviousStyle && containerToPreviousStyle[position],
-        ]
-      }
+      return [
+        styles[position].containerToNext,
+        containerToNextStyle && containerToNextStyle[position],
+      ]
     }
     return null
   }
@@ -296,8 +286,6 @@ export default class Bubble<
       previousMessage,
       position,
       containerToPreviousStyle,
-      containerToNextStyle,
-      inverted,
     } = this.props
     if (
       currentMessage &&
@@ -306,17 +294,10 @@ export default class Bubble<
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage)
     ) {
-      if (inverted) {
-        return [
-          styles[position].containerToPrevious,
-          containerToPreviousStyle && containerToPreviousStyle[position],
-        ]
-      } else {
-        return [
-          styles[position].containerToNext,
-          containerToNextStyle && containerToNextStyle[position],
-        ]
-      }
+      return [
+        styles[position].containerToPrevious,
+        containerToPreviousStyle && containerToPreviousStyle[position],
+      ]
     }
     return null
   }
