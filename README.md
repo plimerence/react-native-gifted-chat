@@ -67,7 +67,7 @@
 
 ## Features
 
-- _`react-native-web`able_
+- _`react-native-web`able_ (since 0.10.0)
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -81,6 +81,10 @@
 - Redux support
 - System message
 - Quick Reply messages (bot)
+
+## Versions notes
+
+- Since v0.10.0 removed `react-native-video` dependency.
 
 ## Dependency
 
@@ -296,7 +300,7 @@ interface QuickReplies {
 - **`renderMessageImage`** _(Function)_ - Custom message image
 - **`renderMessageVideo`** _(Function)_ - Custom message video
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
-- **`videoProps`** _(Object)_ - Extra props to be passed to the [`<Video>`](https://github.com/react-native-community/react-native-video) component created by the default `renderMessageVideo`
+- **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
