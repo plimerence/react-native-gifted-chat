@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { View, ViewPropTypes, StyleProp, ViewStyle } from 'react-native'
-import Video, { VideoProperties } from 'react-native-video'
 import { IMessage } from './types'
 
 export interface MessageVideoProps<TMessage extends IMessage> {
@@ -48,15 +47,6 @@ export default class MessageVideo<
     } = this.props
     return (
       <View style={containerStyle}>
-        <Video
-          {...videoProps}
-          ref={r => {
-            this.player = r
-          }}
-          source={{ uri: currentMessage!.video! }}
-          style={videoStyle}
-          resizeMode='cover'
-        />
       </View>
     )
   }
